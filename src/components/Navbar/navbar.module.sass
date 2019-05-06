@@ -1,0 +1,60 @@
+@import '../../vars'
+
+.wrapper
+  background-color: $main-gray
+  color: #fff
+  padding: 25px
+  width: 35%
+  height: 630px
+  .logo
+    font-size: 35px
+    font-family: 'Revalia', cursive, sans-serif
+    line-height: 1.1
+    p span
+      display: block
+      color: $accent-yellow
+  .mainCnt
+    ul
+      margin-top: 50px
+      li
+        a
+          display: flex
+          align-items: center
+          font-size: 16px
+          color: rgba($white, .95)
+          text-decoration: none
+          margin-bottom: 12px
+          transition: color .25s ease
+          text-transform: capitalize
+          i
+            display: flex
+            justify-content: center
+            align-items: center
+            width: 35px
+            height: 35px
+            font-size: 16px
+            border: 1px solid $white
+            border-radius: 50%
+            margin-right: 7px
+            transition: color .25s ease
+          &:hover
+            color: #fff
+            transition: color .25s ease
+            i
+              color: $accent-yellow
+              transition: color .25s ease
+          &:focus
+            color: $accent-yellow
+            transition: color .25s ease
+            i
+              border: 1px solid $accent-yellow
+        .active
+          color: $accent-yellow
+          transition: color .25s ease
+          i
+            border: 1px solid $accent-yellow
+          &:hover
+            color: $accent-yellow
+            transition: color .25s ease
+            i
+              border: 1px solid $accent-yellow
