@@ -25,11 +25,25 @@ const EntriesArchive = (props) => {
 
   let allEntries = getAllEntries()
 
-  const GetEntriesBlock = ({pos}) => {
+  let entriesBlock = []
+
+  const GetEntriesBlock = ({startIdx, resetVal, factor}) => {
 
     if(allEntries) {
-      let entriesBlock = []
-      let idx = (pos === 1) ? allEntries.length - 1 : ((allEntries.length - 1) - pos)
+      let idx
+
+      (!startIdx)
+        ? idx = allEntries.length - 1
+        : idx = startIdx - factor
+
+      if (idx > allEntries.length - 1) {
+        resetVal()
+        idx = allEntries.length - 1
+      }
+
+      if (idx <= 0) {
+        idx = ((allEntries.length - 1) % 4) ? ((allEntries.length - 1) % 4) : 3
+      }
 
       for (let i = 0; i < 4; i++) {
         entriesBlock[i] = allEntries[idx - i]
@@ -43,16 +57,25 @@ const EntriesArchive = (props) => {
 
   }
 
+  const setStartElem = (factor) => {
+    let newStartIdx = entriesBlock[0].props.id
+    props.setNewStartPos(newStartIdx, factor)
+  }
+
   return (
     <div>
       <div className={style.topLine}></div>
       <div className={style.wrapp}>
-        <GetEntriesBlock pos={props.posFirstElem}/>
+        <GetEntriesBlock
+          startIdx={props.startElemIdx}
+          resetVal={props.resetStartElem}
+          factor={props.changeFactor}
+        />
       </div>
       <div className={style.buttonsBlock}>
-        <button className={`${style.prevBtn}`} onClick={props.getPrevEntries}>Prev</button>
+        <button className={`${style.prevBtn}`} onClick={()=>{setStartElem(1)}}>Prev</button>
         <span> / </span>
-        <button className={`${style.nextBtn}`}>Next</button>
+        <button className={`${style.nextBtn}`} onClick={()=>{setStartElem(-1)}}>Next</button>
       </div>
     </div>
   )

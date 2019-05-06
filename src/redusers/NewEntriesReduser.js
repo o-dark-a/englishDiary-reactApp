@@ -2,14 +2,14 @@ const CLEARE_CURRENT_ENTRY = 'CLEARE_CURRENT_ENTRY'
 const CHANGE_CURRENT_ENTRY = 'CHANGE_CURRENT_ENTRY'
 const SAVE_NEW_ENTRY = 'SAVE_NEW_ENTRY'
 const CREATE_LOCAL_STORAGE = 'CREATE_LOCAL_STORAGE'
-const GET_PREV_ENTRIES = 'GET_PREV_ENTRIES'
+const SET_NEW_START_POS = 'SET_NEW_START_POS'
+const RESET_START_ELEM = 'RESET_START_ELEM'
 
 let initialState = {
   currentEntry: '',
   allEntries: (JSON.parse(localStorage.getItem('allEntries')) === null) ? [] : JSON.parse(localStorage.getItem('allEntries')),
-  posFirstElem: 1,
-  callCountPrev: 1,
-  callCountNext: 0
+  startElemIdx: 0,
+  changeFactor: 4
 }
 
 
@@ -37,11 +37,16 @@ const NewEntriesReduser = (state = initialState, action) => {
       let localState = [...state.allEntries]
       localStorage.setItem('allEntries', JSON.stringify(localState))
       return state
-    case GET_PREV_ENTRIES:
+    case SET_NEW_START_POS:
       return {
         ...state,
-        callCountPrev: state.callCountPrev + 1,
-        posFirstElem: state.callCountPrev*4
+        startElemIdx: action.newPos,
+        changeFactor: action.factor*4,
+      }
+    case RESET_START_ELEM:
+      return {
+        ...state,
+        startElemIdx: 0
       }
     default:
       return state
@@ -52,6 +57,7 @@ export const cleareCurrentEntryAC = () => ({type: CLEARE_CURRENT_ENTRY})
 export const changeCurrentEntryAC = (newValue) => ({type: CHANGE_CURRENT_ENTRY, newValue})
 export const saveNewEntryAC = (textEntry, publicDate) => ({type: SAVE_NEW_ENTRY, textEntry, publicDate})
 export const createLocalStorageAC = () => ({type: CREATE_LOCAL_STORAGE})
-export const getPrevEntriesAC = () => ({type: GET_PREV_ENTRIES})
+export const setNewStartPosAC = (newPos, factor) => ({type: SET_NEW_START_POS, newPos, factor})
+export const resetStartElemAC = () => ({type: RESET_START_ELEM})
 
 export default NewEntriesReduser

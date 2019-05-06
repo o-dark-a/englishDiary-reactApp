@@ -1,17 +1,20 @@
 import { connect } from 'react-redux'
 import EntriesArchive from './EntriesArchive'
-import { getPrevEntriesAC } from '../../redusers/NewEntriesReduser'
+import { resetStartElemAC, setNewStartPosAC } from '../../redusers/NewEntriesReduser';
 
 const mapStateToProps = (state) => {
   return {
     allEntries: state.newEntries.allEntries,
-    callCountPrev: state.newEntries.callCountPrev,
-    posFirstElem: state.newEntries.posFirstElem
+    startElemIdx: state.newEntries.startElemIdx,
+    changeFactor: state.newEntries.changeFactor
   }
 }
 const mapDispatchToProps = (dispatch) => ({
-  getPrevEntries() {
-    dispatch(getPrevEntriesAC())
+  setNewStartPos(newPos, factor) {
+    dispatch(setNewStartPosAC(newPos, factor))
+  },
+  resetStartElem() {
+    dispatch(resetStartElemAC())
   }
 })
 
