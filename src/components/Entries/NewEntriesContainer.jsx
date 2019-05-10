@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import NewEntries from './NewEntries'
-import { cleareCurrentEntryAC, changeCurrentEntryAC, saveNewEntryAC, createLocalStorageAC } from '../../redusers/NewEntriesReduser';
+import { cleareCurrentEntryAC, changeCurrentEntryAC, saveNewEntryAC, createLocalStorageAC } from '../../redusers/NewEntriesReduser'
 
 const mapStateToProps = (state) => {
   return {
@@ -16,6 +16,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   saveNewEntry(textEntry, publicDate) {
     dispatch(saveNewEntryAC(textEntry, publicDate))
+    dispatch(createLocalStorageAC())
+  },
+  updateLocalStorage() {
     dispatch(createLocalStorageAC())
   }
 })

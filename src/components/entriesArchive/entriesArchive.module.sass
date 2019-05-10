@@ -1,73 +1,99 @@
 @import '../../vars'
 
-.wrapp
-  .wrappBlock
+.mainWrapp
+  height: 100%
+  .wrappEntriesBlock
     position: relative
-    background-color: #fff
-    color: #a7a7a7
-    font-size: 14px
-    padding: 15px
-    padding-bottom: 20px
-    margin-bottom: 13px
-    h3
-      font-size: 18px
-      color: $gray
-      text-decoration: underline
-    span
-      display: none
-    .toggleView
-      position: absolute
-      display: flex
-      flex-direction: column
-      align-items: flex-end
-      right: 15px
-      bottom: -10px
-      z-index: 999
-      opacity: .95
-      transition: opacity .25s ease
-      &:before, &:after
-        line-height: 1
-        font-weight: bold
-      &:before
-        content: 'close'
-        font-size: 16px
-      &:after
-        content: '\f410'
-        font-size: 25px
-        font-family: "Font Awesome 5 Free"
-        color: $accent-orange
-      &:hover
-        &:before, &:after
-        cursor: pointer
-        opacity: 1
+    height: 95%
+    .wrappBlock
+      position: relative
+      height: 100%
+      background-color: #fff
+      color: #a7a7a7
+      font-size: 14px
+      padding: 15px
+      padding-bottom: 20px
+      margin-bottom: 13px
+      h3
+        font-size: 18px
+        color: $gray
+        text-decoration: underline
+      textarea
+        width: 100%
+        line-height: 1.2
+        margin-top: 5px
+        resize: none
+        border: none
+      span
+        display: none
+      .toggleView
+        position: absolute
+        display: flex
+        flex-direction: column
+        align-items: flex-end
+        right: 15px
+        bottom: -10px
+        z-index: 5
+        opacity: .95
         transition: opacity .25s ease
-  .wrappBlock.closed
-    height: 70px
-    border-bottom: 1px solid $gray
-    p
-      overflow: hidden
-      height: 50%
-    span
-      display: inline-block
-    .toggleView
-      &:before
-        content: 'more'
-      &:after
-        content: '\f02e'
-        color: $accent-yellow
-.buttonsBlock
-  display: flex
-  justify-content: center
-  align-items: center
-  margin-top: 5px
-  font-size: 18px
-  .prevBtn, .nextBtn
-    border: none
-    background-color: transparent
-    color: $gray
-    font-size: 20px
-    margin: 0 7px
-    &:hover
-      cursor: pointer
-      color: darken($gray, 25%)
-      text-decoration: underline
+        &:before, &:after
+          line-height: 1
+          font-weight: bold
+        &:before
+          content: 'close'
+          font-size: 14px
+        &:after
+          content: '\f410'
+          font-size: 20px
+          font-family: "Font Awesome 5 Free"
+          color: $accent-orange
+        &:hover
+          &:before, &:after
+          cursor: pointer
+          opacity: 1
+          transition: opacity .25s ease
+    .wrappBlock.back
+      z-index: 0
+    .wrappBlock.front, .wrappBlock.edit
+      position: absolute
+      width: 95%
+      height: 100%
+      top: 0
+      left: 0
+      z-index: 99
+      .toggleView
+        z-index: 99  
+      textarea
+        height: 95%
+        overflow: visible !important
+        z-index: 99
+    .wrappBlock.closed
+      height: 70px
+      border-bottom: 1px solid $gray
+      textarea
+        overflow: hidden
+        cursor: default
+      span
+        display: inline-block
+      .toggleView
+        &:before
+          content: 'more'
+        &:after
+          content: '\f02e'
+          color: $accent-yellow
+  .buttonsBlock
+    display: flex
+    justify-content: center
+    align-items: center
+    margin-top: 5px
+    font-size: 18px
+    .prevBtn, .nextBtn
+      border: none
+      background-color: transparent
+      color: $gray
+      font-size: 20px
+      margin: 0 7px
+      &:hover
+        cursor: pointer
+        color: darken($gray, 25%)
+        text-decoration: underline

@@ -45,7 +45,7 @@ const Navbar = (props) => {
       </div>
       <div className={style.buttonsGroup}>
         <Route path="/diary/new-entry" render={BtnsNewEntries} />
-        <Route path="/diary/entries-archive" render={BtnsEntriesArchive} />
+        <Route path="/diary/entries-archive" render={() => { return <BtnsEntriesArchive changeEntry={props.changeEntry} />}} />
         
       </div>
     </div>
