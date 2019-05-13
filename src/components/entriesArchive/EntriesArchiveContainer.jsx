@@ -1,15 +1,13 @@
 import { connect } from 'react-redux'
 import EntriesArchive from './EntriesArchive'
-import { resetStartElemAC, setNewStartPosAC, setNewValueAC, createLocalStorageAC } from '../../redusers/NewEntriesReduser'
+import { resetStartElemAC, setNewStartPosAC, setNewValueAC, createLocalStorageAC, selectEntryAC, resetDeletedEntryIdAC } from '../../redusers/NewEntriesReduser'
 
 const mapStateToProps = (state) => {
   return {
     allEntries: state.newEntries.allEntries,
     startElemIdx: state.newEntries.startElemIdx,
     changeFactor: state.newEntries.changeFactor,
-    viewMode: state.newEntries.viewMode,
-    editEntryId: state.newEntries.editEntryId,
-    rolledUpItem: state.newEntries.rolledUpItem
+    selectedEntryId: state.newEntries.selectedEntryId
   }
 }
 const mapDispatchToProps = (dispatch) => ({
@@ -22,6 +20,12 @@ const mapDispatchToProps = (dispatch) => ({
   entryEditing(newValue, id) {
     dispatch(setNewValueAC(newValue, id))
     dispatch(createLocalStorageAC())
+  },
+  selectEntry(id) {
+    dispatch(selectEntryAC(id))
+  },
+  resetDeletedEntryId() {
+    dispatch(resetDeletedEntryIdAC())
   }
 })
 

@@ -1,12 +1,13 @@
 import React from 'react'
 import style from './entriesArchive.module.sass'
+import EntriesView from './EntriesView'
 
 class EntriesArchive extends React.Component {
   constructor (props) {
     super(props)
     this.entriesBlock = []
     this.state = {
-      entriesCollection: false,
+      entriesCollection: [],
       readOnly: true
     }
   }
@@ -16,18 +17,38 @@ class EntriesArchive extends React.Component {
   }
 
   entriesCollectionForming() {
-    this.setState({
-      entriesCollection: this.props.allEntries.map((entry, idx) => {
-        return (
-          <div id={idx} key={idx} className={`${style.wrappBlock} ${style.closed}`}>
-            <h3>Created on: {entry.date}</h3>
-            <textarea value={entry.text} onChange={this.changeEntry} readOnly={this.state.readOnly}></textarea>
-            <span> . . .</span>
-            <div className={`${style.toggleView}`} onClick={this.rollStateChange}></div>
-          </div>
-        )
+    if (this.props.allEntries.length !== 0) {
+      this.setState({
+        entriesCollection: this.props.allEntries.map((entry, idx) => {
+          return (
+            <div id={idx} key={idx} className={`${style.wrappBlock} ${style.closed}`} onClick={(e) => {this.selectEntry(idx, e)}}>
+              <h3>Created on: {entry.date}</h3>
+              <textarea value={entry.text} onChange={this.changeEntry} readOnly={this.state.readOnly}></textarea>
+              <span>. . .</span>
+              <div className={`${style.toggleView}`} onClick={this.rollStateChange}></div>
+            </div>
+          )
+        })
       })
-    })
+    }
+    
+  }
+
+  selectEntry = (id, e) => {
+
+    this.props.selectEntry(id)
+
+    let ollectionHtmlElems = e.currentTarget.parentElement.children
+
+    for (let i = 0; i < ollectionHtmlElems.length; i++) {
+      if (+ollectionHtmlElems[i].id === id && ollectionHtmlElems[i].classList.contains(`${style.closed}`)) {
+        ollectionHtmlElems[i].classList.toggle(`${style.selected}`)
+      } else {
+        ollectionHtmlElems[i].classList.remove(`${style.selected}`)
+      }
+    }
+    
+    
   }
 
   changeEntry = (e) => {
@@ -54,45 +75,33 @@ class EntriesArchive extends React.Component {
 
   }
 
-  EntriesView = (startIdx, factor) => {
-
-    if(this.state.entriesCollection && this.state.entriesCollection.length !== 0) {
-      let idx,
-          lastElemIdxOfCollection = this.state.entriesCollection.length - 1;
-
-      (!startIdx) ? idx = lastElemIdxOfCollection : idx = startIdx - factor
-
-      if (idx > lastElemIdxOfCollection) {
-        this.props.resetStartElem()
-        idx = lastElemIdxOfCollection
-      }
-
-      if (idx <= 0) { idx = ((lastElemIdxOfCollection) % 4) ? ((lastElemIdxOfCollection) % 4) : 0 }
-
-      for (let i = 0; i < 4; i++) {
-        let elem = this.state.entriesCollection[idx - i]
-        this.entriesBlock[i] = elem
-      }
-
-      return this.entriesBlock
-
-    } else {
-      return <div><h3>No entry</h3></div>
-    }
-
-  }
-
   setStartElem = (factor) => {
     let newStartIdx = +(this.entriesBlock[0].props.id)
     this.props.setNewStartPos(newStartIdx, factor)
   }
-  
+
+  notifyAboutDeletion = (reset) => {
+    setTimeout(() => {
+      reset()
+      this.entriesCollectionForming()
+    }, 2000)
+    return <h4 className={`${style.deleted}`}>Entry deleted</h4> 
+  }
 
   render () {
     return (
       <div className={style.mainWrapp}>
+        { (this.props.selectedEntryId === 'deleted')
+            ? this.notifyAboutDeletion(this.props.resetDeletedEntryId)
+            : null
+        }
         <div className={style.wrappEntriesBlock}>
-          {this.EntriesView(this.props.startElemIdx, this.props.changeFactor)}
+        <EntriesView startIdx={this.props.startElemIdx}
+                     factor={this.props.changeFactor}
+                     entries={this.state.entriesCollection}
+                     entriesBlock={this.entriesBlock}
+                     resetStartElem={this.props.resetStartElem}
+        />
         </div>
         {(this.state.entriesCollection)
           ? <div className={style.buttonsBlock}>

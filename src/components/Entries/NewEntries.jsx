@@ -38,11 +38,15 @@ const newEntries = (props) => {
 
   return (
     <div className={style.mainFlexCont}>
-      <Navbar clearTextarea={props.clearTextarea} saveEntry={saveEntry} changeEntry={props.updateLocalStorage}/>
+      <Navbar clearTextarea={props.clearTextarea}
+              saveEntry={saveEntry}
+              deleteEntry={props.deleteEntry}
+              selectedEntryId={props.selectedEntryId}
+      />
       <div className={style.wrapper}>
         <div className={style.topLine}></div>
         <Route path="/diary/new-entry" render={NewEntryComponent} />
-        <Route path="/diary/entries-archive" render={() => ( <EntriesArchiveContainer/> )} />
+        <Route path="/diary/entries-archive" render={() => ( <EntriesArchiveContainer /> )} />
       </div>
     </div>
   )

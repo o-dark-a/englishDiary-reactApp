@@ -52,6 +52,13 @@
           cursor: pointer
           opacity: 1
           transition: opacity .25s ease
+    .wrappBlock.selected
+      background-color: $gray
+      .toggleView
+        color: #fff
+      textarea, h3, p, span
+        color: #fff
+        background-color: $gray
     .wrappBlock.back
       z-index: 0
     .wrappBlock.front, .wrappBlock.edit
@@ -66,15 +73,19 @@
       textarea
         height: 95%
         overflow: visible !important
+        user-select: auto
         z-index: 99
     .wrappBlock.closed
       height: 70px
       border-bottom: 1px solid $gray
+      cursor: pointer
       textarea
         overflow: hidden
-        cursor: default
+        cursor: pointer
+        user-select: none
       span
         display: inline-block
+        user-select: none
       .toggleView
         &:before
           content: 'more'
@@ -97,3 +108,5 @@
         cursor: pointer
         color: darken($gray, 25%)
         text-decoration: underline
+  .deleted
+    color: $accent-orange

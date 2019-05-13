@@ -6,14 +6,6 @@ import BtnsEntriesArchive from './btns/BtnsEntriesArchive'
 
 const Navbar = (props) => {
 
-  const BtnsNewEntries = () => {
-    return (
-      <BtnsEntries 
-        clearTextarea={props.clearTextarea} saveEntry={props.saveEntry}
-      />
-    );
-  }
-
   return (
     <div className={style.wrapper}>
       <div className={style.logo}>
@@ -44,8 +36,16 @@ const Navbar = (props) => {
         </ul>
       </div>
       <div className={style.buttonsGroup}>
-        <Route path="/diary/new-entry" render={BtnsNewEntries} />
-        <Route path="/diary/entries-archive" render={() => { return <BtnsEntriesArchive changeEntry={props.changeEntry} />}} />
+        <Route path="/diary/new-entry"
+          render={() => {
+            return <BtnsEntries clearTextarea={props.clearTextarea} saveEntry={props.saveEntry} />
+          }}
+        />
+        <Route path="/diary/entries-archive"
+          render={() => {
+            return <BtnsEntriesArchive deleteEntry={props.deleteEntry} selectedEntryId={props.selectedEntryId} />
+          }}deleteEntry
+        />
         
       </div>
     </div>
