@@ -1,0 +1,55 @@
+@import '../../vars.sass'
+
+.mainWrapp
+  background-color: transparent
+  height: 100%
+  .topLine
+    display: flex
+    justify-content: space-between
+    h3
+      text-transform: capitalize
+    .switchBtns
+      display: flex
+      background-color: $accent-yellow
+      border-radius: 50px
+      width: 35%
+      height: 35px
+      button
+        display: flex
+        justify-content: center
+        align-items: center
+        width: 100%
+        border-radius: 50px
+        height: 35px
+        border: none
+        padding: 0
+        a
+          display: inline-block
+          width: 100%
+          height: 100%
+          color: $gray
+          font-size: 18px
+          font-family: 'Reem Kufi', sans-serif
+          text-decoration: none
+          border-radius: 50px
+          line-height: 35px
+        a.active
+          background-color: $accent-yellow
+      .btnWords
+      .btnPhrases
+  .contentWrapp
+    background-color: transparent
+    margin-top: 10px
+    height: 65%
+  .btnNavigation
+    float: right
+    margin-top: 10px
+    button
+      background-color: transparent
+      border: none
+      font-size: 18px
+      &:hover
+        cursor: pointer
+    span
+      &:hover
+        cursor: default

@@ -1,0 +1,78 @@
+@import '../../../vars'
+
+.mainWrapp
+  position: relative
+  background-color: transparent
+  height: 100%
+  width: 100%
+  .form
+    display: flex
+    justify-content: space-between
+    flex-wrap: wrap
+    position: absolute
+    width: 100%
+    top: 100%
+    left: 0
+    margin-top: 50px
+    input
+      width: 46%
+      margin: 0 2%
+      border-color: $gray
+      color: #000
+      padding: 0
+      font-size: 18px
+    .btnDeleteWord
+      padding: 0
+      border: none
+    .btnAddWordDisabled
+      opacity: .2
+      cursor: default
+    button
+      display: block
+      margin: 0
+      margin-top: 10px
+    .fieldFillError.off
+      display: none
+    .fieldFillError.on
+      color: $accent-orange
+      font-weight: 600
+  .oneWord
+    display: flex
+    align-items: center
+    margin: 5px
+    height: 50px
+    border-radius: 25px
+    font-family: 'Reem Kufi', sans-serif
+    overflow: hidden
+    text-transform: uppercase
+    h5
+      position: relative
+      display: flex
+      justify-content: center
+      align-items: center
+      width: 100%
+      height: 100%
+      font-size: 18px
+      color: #ffffff
+      padding: 15px
+      line-height: 1.25
+      &:hover
+        cursor: pointer
+      span
+        position: absolute
+        display: flex
+        justify-content: center
+        align-items: center
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        background-color: #fff
+        font-size: 13px
+        font-weight: bold
+        border-radius: 25px
+        transform: translateY(-100%)
+      span.active
+        transform: translateY(0%)
+    .hookedWord
+      opacity: .5

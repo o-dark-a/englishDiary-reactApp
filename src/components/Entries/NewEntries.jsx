@@ -3,6 +3,7 @@ import style from './enries.module.sass'
 import Navbar from '../Navbar/Navbar'
 import { Route } from 'react-router-dom'
 import EntriesArchiveContainer from '../entriesArchive/EntriesArchiveContainer'
+import LexiconContainer from '../Lexicon/LexiconContainer'
 
 const newEntries = (props) => {
 
@@ -47,6 +48,7 @@ const newEntries = (props) => {
         <div className={style.topLine}></div>
         <Route path="/diary/new-entry" render={NewEntryComponent} />
         <Route path="/diary/entries-archive" render={() => ( <EntriesArchiveContainer /> )} />
+        <Route path="/diary/lexicon" render={() => ( <LexiconContainer /> )} />
       </div>
     </div>
   )

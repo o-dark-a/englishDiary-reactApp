@@ -66,9 +66,7 @@ const NewEntriesReduser = (state = initialState, action) => {
     case DELETE_ENTRY:
       if (state.selectedEntryId !== null) {
         state.allEntries.splice(state.selectedEntryId, 1)
-        for (let i = 0; i < state.allEntries.length; i++) {
-          state.allEntries[i].id = i
-        }
+        state.allEntries.forEach((e,i) => e.id = i)
       } else {
         return state
       }
